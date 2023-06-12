@@ -1,7 +1,18 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+  flex-direction: row;
 }
 
+.form-container {
+  display: flex;
+  width: 12rem;
+  row-gap: 12px;
+  justify-content: center;
+  flex-direction: column;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

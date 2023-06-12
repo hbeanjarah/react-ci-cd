@@ -1,0 +1,7 @@
+{
+  "plugins": ["cypress", "react"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  }
+}
