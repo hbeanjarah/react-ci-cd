@@ -41,6 +41,6 @@
     "eslint-plugin-cypress": "^2.13.3"
   },
   "engines": {
-    "node": "16.10.0"
+    "node": "16.16.0"
   }
 }
