@@ -39,5 +39,8 @@
   "devDependencies": {
     "cypress": "^12.14.0",
     "eslint-plugin-cypress": "^2.13.3"
+  },
+  "engines": {
+    "node": ">=16 <18"
   }
 }
