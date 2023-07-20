@@ -16,6 +16,9 @@ jobs:
       - run:
           name: "Run linting"
           command: yarn lint
+      - run:
+          name: "Run build"
+          command: yarn build
       - run: echo "installation finished"
   deploy_project:
     executor: aws-cli/default
