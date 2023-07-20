@@ -34,5 +34,5 @@ workflows: # Workflows are a declarative way to orchestrate jobs and their run o
       - build
       - deploy_project:
           requires:
-            - build_project
+            - build
           context: aws-context
