@@ -10,7 +10,7 @@ jobs:
       - run: node --version
       - run: echo "it's working"
 
-  # workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
+workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
   test_app:
     jobs:
       - build
