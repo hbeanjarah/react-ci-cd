@@ -17,7 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "yarn cypress open",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -39,7 +39,10 @@
   },
   "devDependencies": {
     "cypress": "^12.14.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-cypress": "^2.13.3",
+    "eslint-plugin-prettier": "^5.0.0",
     "prettier": "3.0.0"
   }
 }
