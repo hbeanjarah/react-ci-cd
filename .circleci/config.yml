@@ -10,9 +10,9 @@ jobs:
       - run: node --version
 
 # workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
-#   test_app:
-#     jobs:
-#       - cypress/run: # Run the cypress/run job from the cypress orb
-#           package-manager: yarn
-#           start-command: yarn start # Run the cypress run command in headless mode
+  test_app:
+    jobs:
+      - cypress/run: # Run the cypress/run job from the cypress orb
+          package-manager: yarn
+          start-command: yarn start # Run the cypress run command in headless mode
 
