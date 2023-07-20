@@ -25,18 +25,11 @@ jobs:
     working_directory: ~/repo
     executor: aws-cli/default
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - aws-cli/setup:
           profile-name: default
-
-      - run:
-          name: "Run build"
-          command: yarn build
-      - run:
-          name: "Print working directory"
-          command: pwd
-      - checkout
       - run:
           name: Upload file to S3
           command: aws s3 sync ./build/ s3://reactcicdtesting --delete
