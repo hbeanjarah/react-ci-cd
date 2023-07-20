@@ -1,7 +1,7 @@
 {
-  "plugins": ["cypress", "react"],
+  "plugins": ["cypress", "react", "prettier"],
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2020
+    "ecmaVersion": "latest"
   }
 }
