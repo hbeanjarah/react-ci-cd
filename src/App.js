@@ -10,7 +10,7 @@ function App() {
         <button type="submit">Login</button>
       </div>
     </div>
-  );
+  )
 }
 
 export default App;
