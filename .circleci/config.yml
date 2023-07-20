@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.18
 
 jobs:
   build:
@@ -15,12 +17,22 @@ jobs:
           name: "Run linting"
           command: yarn lint
       - run: echo "installation finished"
+  deploy_project:
+    executor: aws-cli/default
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-cli/setup:
+          profile-name: default
+      - run:
+          name: Upload file to S3
+          command: aws s3 sync ./dist/ s3://circle-ci-s3-deploy --delete
 
 workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
   test_app:
     jobs:
       - build
-      # - cypress/run: # Run the cypress/run job from the cypress orb
-      #     package-manager: yarn
-      #     start-command: yarn start # Run the cypress run command in headless mode
-
+      - deploy_project:
+          requires:
+            - build_project
+          context: aws-context
