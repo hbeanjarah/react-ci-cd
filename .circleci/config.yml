@@ -30,8 +30,10 @@ jobs:
       - aws-cli/setup:
           profile-name: default
       - run:
-          name: 'Print working directory'
+          name: "Print working directory"
           command: pwd
+      - checkout:
+          path: ~/repo
       - run:
           name: Upload file to S3
           command: aws s3 sync ./build/ s3://reactcicdtesting --delete
