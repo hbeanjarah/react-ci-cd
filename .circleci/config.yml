@@ -4,6 +4,7 @@ orbs:
 
 jobs:
   build:
+    working_directory: ~/repo
     docker:
       - image: cimg/node:20.3.0
     steps:
@@ -21,6 +22,7 @@ jobs:
           command: yarn build
       - run: echo "installation finished"
   deploy_project:
+    working_directory: ~/repo
     executor: aws-cli/default
     steps:
       - attach_workspace:
@@ -29,7 +31,7 @@ jobs:
           profile-name: default
       - run:
           name: 'Print working directory'
-          command: ls
+          command: pwd
       - run:
           name: Upload file to S3
           command: aws s3 sync ./build/ s3://reactcicdtesting --delete
