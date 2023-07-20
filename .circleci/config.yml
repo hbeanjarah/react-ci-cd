@@ -29,6 +29,10 @@ jobs:
           at: .
       - aws-cli/setup:
           profile-name: default
+
+      - run:
+          name: "Run build"
+          command: yarn build
       - run:
           name: "Print working directory"
           command: pwd
