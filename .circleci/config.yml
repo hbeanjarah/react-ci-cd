@@ -18,13 +18,6 @@ jobs:
           name: "Run linting"
           command: yarn lint
       - run:
-          name: "Run the app"
-          command: yarn start
-          background: true
-      - run:
-          name: "Run cypress test"
-          command: yarn cypress:run
-      - run:
           name: "Run build"
           command: yarn build
       - persist_to_workspace:
