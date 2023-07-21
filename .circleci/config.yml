@@ -1,12 +1,13 @@
 version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@4.0.0
-
+  cypress: cypress-io/cypress@3
 jobs:
   build_and_test:
     working_directory: ~/circle-ci-s3-deploy
     docker:
       - image: cimg/node:20.3.0
+      - image: cypress/base:18.16.0
     steps:
       - checkout
       - run: node --version
@@ -17,6 +18,9 @@ jobs:
       - run:
           name: "Run linting"
           command: yarn lint
+      - run:
+          name: "Run the app"
+          command: yarn start
       - run:
           name: "Run cypress test"
           command: yarn cypress:run
