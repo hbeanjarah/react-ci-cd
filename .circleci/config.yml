@@ -6,7 +6,6 @@ jobs:
     working_directory: ~/circle-ci-s3-deploy
     docker:
       - image: cimg/node:20.3.0
-      - image: cypress/base:18.16.0
     steps:
       - checkout
       - run: node --version
