@@ -7,7 +7,7 @@ function App() {
         <p>CircleCi CI/CD testing</p>
         <input name="username" type="text" placeholder="username" />
         <input name="password" type="password" placeholder="password" />
-        <button type="submit">Login</button>
+        <button type="submit">Login </button>
       </div>
     </div>
   );
