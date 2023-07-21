@@ -26,11 +26,12 @@ jobs:
             - .
       - run: echo "installation finished"
   test_e2e:
+    docker:
+      - image: cimg/node:20.3.0
     steps:
       - run:
-          echo "Run cypress"
-          # name: "Run cypress"
-          # command: yarn cypress:run
+          name: "Run cypress"
+          command: yarn cypress:run
   deploy_project:
     executor: aws-cli/default
     steps:
@@ -49,6 +50,7 @@ workflows: # Workflows are a declarative way to orchestrate jobs and their run o
       - build:
           requires:
             - test_e2e
+      - test_e2e
       - deploy_project:
           requires:
             - build
