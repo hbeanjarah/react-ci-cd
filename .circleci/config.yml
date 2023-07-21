@@ -19,6 +19,7 @@ jobs:
       - run:
           name: "Run the app"
           command: yarn start
+          background: true
       - run:
           name: "Run cypress test"
           command: yarn cypress:run
