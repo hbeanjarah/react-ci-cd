@@ -46,7 +46,7 @@ jobs:
 workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
   test_app:
     jobs:
-      - build
+      - build:
           requires:
             - test_e2e
       - deploy_project:
