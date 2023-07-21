@@ -3,7 +3,7 @@ describe("login e2e testing", () => {
     cy.visit("http://localhost:3000");
   });
   it("should contains ", () => {
-    cy.contains("CircleCi CI/CD testingdsdsdsdsds");
+    cy.contains("CircleCi CI/CD testing");
   });
   it("should be clickable and fillable", () => {
     cy.get('input[name="username"]').focus();
