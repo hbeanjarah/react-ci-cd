@@ -44,9 +44,12 @@ workflows: # Workflows are a declarative way to orchestrate jobs and their run o
   test_app:
     jobs:
       - cypress/run: # Run the cypress/run job from the cypress orb
+          name: Cypress test
           package-manager: yarn
           start-command: yarn start # Run the cypress run command in headless mode
-      - build_and_test
+      - build_and_test:
+          requires: 
+            - Cypress test
       - deploy_project:
           requires:
             - build_and_test
