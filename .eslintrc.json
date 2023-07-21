@@ -1,7 +1,55 @@
 {
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["airbnb", "prettier", "plugin:prettier/recommended"],
   "plugins": ["cypress", "react"],
+  "rules": { "react/prop-types": 0,
+  "react/react-in-jsx-scope": 0,
+  "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+  "import/newline-after-import": ["error", { "count": 1 }],
+  "import/prefer-default-export": 0,
+  "no-param-reassign": 0,
+  "react/function-component-definition": 0,
+  "react/jsx-props-no-spreading": 0,
+  "radix": 0,
+  "no-shadow": 0,
+  "consistent-return": 0,
+  "arrow-body-style": 0,
+  "default-param-last": 0,
+  "jsx-a11y/label-has-associated-control": 0,
+  "react/destructuring-assignment": 0,
+  "jsx-a11y/no-noninteractive-element-interactions": 0,
+  "jsx-a11y/click-events-have-key-events": 0,
+  "jsx-a11y/no-static-element-interactions": 0,
+  "dot-notation": 0,
+  "no-return-assign": 0,
+  "no-restricted-syntax": 0,
+  "no-restricted-import": 0,
+  "import/extensions": 0,
+  "react/no-danger": 0,
+  "react/jsx-no-bind": 0,
+  "react/button-has-type": 0,
+  "react/no-array-index-key": 0,
+  "no-nested-ternary": 0,
+  "no-unused-vars": [
+    "error",
+    {
+      "ignoreRestSiblings": true,
+      "destructuredArrayIgnorePattern": "[A-Z]",
+      "caughtErrors": "none"
+    }
+  ]},
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2020
+    "ecmaVersion": "latest"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }

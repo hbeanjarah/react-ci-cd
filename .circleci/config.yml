@@ -1,18 +1,56 @@
-version: 2.1 # Use 2.1 to make use of orbs and other features
-orbs: # An orb is a reusable package of CircleCI configuration that you may share
-  # across projects, enabling you to create encapsulated, parameterized commands, jobs, and
-  # executors that can be used across multiple projects.
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@4.0.0
   cypress: cypress-io/cypress@3.1.2
-# jobs:
-#   deploy-job:
-#     steps:
-#       - add_ssh_keys:
-#           fingerprints:
-#             - "84:8e:77:2c:ec:f6:1b:d8:a7:f7:a5:12:ea:2d:bc:a4"
+jobs:
+  build_and_test:
+    working_directory: ~/circle-ci-s3-deploy
+    docker:
+      - image: cimg/node:20.3.0
+    steps:
+      - checkout
+      - run: node --version
+      - run: echo "it's working"
+      - run:
+          name: "Install dependencies"
+          command: yarn
+      - run:
+          name: "Run linting"
+          command: yarn lint
+      - run:
+          name: "Run build"
+          command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+      - run: echo "Jobs are finished"
+      - store_test_results:
+          path: test-results
+    parallelism: 6
+  deploy_project:
+    executor: aws-cli/default
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-cli/setup:
+          profile_name: default
+      - checkout
+      - run:
+          name: Upload file to S3
+          command: aws s3 sync ./build/ s3://reactcicdtesting --delete
+
 workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
-  build:
+  test_app:
     jobs:
       - cypress/run: # Run the cypress/run job from the cypress orb
+          name: Cypress test
           package-manager: yarn
           start-command: yarn start # Run the cypress run command in headless mode
-
+      - build_and_test:
+          requires: 
+            - Cypress test
+      - deploy_project:
+          requires:
+            - build_and_test
+          context: aws-context
