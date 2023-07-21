@@ -1,9 +1,9 @@
 version: 2.1
 orbs:
-  aws-cli: circleci/aws-cli@0.1.18
+  aws-cli: circleci/aws-cli@4.0.0
 
 jobs:
-  build:
+  build_and_test:
     working_directory: ~/circle-ci-s3-deploy
     docker:
       - image: cimg/node:20.3.0
@@ -18,27 +18,25 @@ jobs:
           name: "Run linting"
           command: yarn lint
       - run:
+          name: "Run cypress test"
+          command: yarn cypress:run
+      - run:
           name: "Run build"
           command: yarn build
       - persist_to_workspace:
           root: .
           paths:
             - .
-      - run: echo "installation finished"
-  test_e2e:
-    docker:
-      - image: cimg/node:20.3.0
-    steps:
-      - run:
-          name: "Run cypress"
-          command: yarn cypress:run
+      - run: echo "Jobs are finished"
+      - store_test_results:
+          path: test-results
   deploy_project:
     executor: aws-cli/default
     steps:
       - attach_workspace:
           at: .
       - aws-cli/setup:
-          profile-name: default
+          profile_name: default
       - checkout
       - run:
           name: Upload file to S3
@@ -47,11 +45,8 @@ jobs:
 workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
   test_app:
     jobs:
-      - build:
-          requires:
-            - test_e2e
-      - test_e2e
+      - build_and_test
       - deploy_project:
           requires:
-            - build
+            - build_and_test
           context: aws-context
