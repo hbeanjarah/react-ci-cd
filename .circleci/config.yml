@@ -27,6 +27,7 @@ jobs:
       - run: echo "installation finished"
   test_e2e:
     steps:
+      - checkout
       - run: 
           name: "Run cypress"
           command: yarn cypress:run
