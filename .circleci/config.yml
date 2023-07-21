@@ -25,7 +25,6 @@ jobs:
           paths:
             - .
       - run: echo "installation finished"
-
   test_e2e:
     steps:
       - run: 
