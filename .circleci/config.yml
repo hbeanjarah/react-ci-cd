@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@4.0.0
+  cypress: cypress-io/cypress@3.1.2
 jobs:
   build_and_test:
     working_directory: ~/circle-ci-s3-deploy
@@ -49,6 +50,9 @@ jobs:
 workflows: # Workflows are a declarative way to orchestrate jobs and their run order.
   test_app:
     jobs:
+      - cypress/run: # Run the cypress/run job from the cypress orb
+          package-manager: yarn
+          start-command: yarn start # Run the cypress run command in headless mode
       - build_and_test
       - deploy_project:
           requires:
