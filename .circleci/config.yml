@@ -25,8 +25,13 @@ jobs:
           paths:
             - .
       - run: echo "installation finished"
+
+  test_e2e:
+    steps:
+      - run: 
+          name: "Run cypress"
+          command: yarn cypress:run
   deploy_project:
-    working_directory: ~/repo
     executor: aws-cli/default
     steps:
       - attach_workspace:
@@ -42,6 +47,8 @@ workflows: # Workflows are a declarative way to orchestrate jobs and their run o
   test_app:
     jobs:
       - build
+          requires:
+            - test_e2e
       - deploy_project:
           requires:
             - build

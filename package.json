@@ -17,6 +17,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "yarn cypress open",
+    "cypress:run": "cypress run --browser=chrome --headless",
     "lint": "eslint ."
   },
   "eslintConfig": {
